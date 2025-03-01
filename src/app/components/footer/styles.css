@@ -1,0 +1,11 @@
+footer {
+  background: #271033;
+  width: 100vw;
+  color: rgb(152, 147, 147);
+  font-size: 0.8rem;
+  padding: 2rem;
+
+  a {
+    color: rgb(152, 147, 147);
+  }
+}
