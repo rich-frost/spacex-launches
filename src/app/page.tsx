@@ -1,6 +1,5 @@
 import { LaunchList } from './components/LaunchList';
 import Search from './components/Search';
-import './page.css';
 
 export default async function Home() {
   return (
