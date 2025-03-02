@@ -43,6 +43,7 @@ const Search = () => {
         }}
       />
       <select
+        aria-label="Sort the list by field and direction"
         name="sort-order"
         id="sort-order"
         onChange={(e) => {

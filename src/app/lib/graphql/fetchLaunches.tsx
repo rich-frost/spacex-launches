@@ -27,6 +27,7 @@ const fetchLaunches = async (query: GqlQuery) => {
     return launchData;
   } catch (e) {
     // TODO: Add log to indicate error fetching data
+    console.warn(e);
     return undefined;
   }
 };
