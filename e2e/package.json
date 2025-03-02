@@ -1,0 +1,15 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "e2e tests for SpaceX Launches project",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test --config playwright.config.local.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.50.1",
+    "axe-playwright": "^2.1.0"
+  }
+}
