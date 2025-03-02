@@ -1,14 +1,18 @@
-import { Footer } from './components/footer';
+import { LaunchList } from './components/LaunchList';
+import Search from './components/Search';
 import './page.css';
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
-      <header>Nav</header>
+      <header>
+        <h1>SpaceX Launches</h1>
+      </header>
       <main>
-        <h1>Hello</h1>
+        <Search />
+        <LaunchList />
       </main>
-      <Footer />
+      <footer>Footer</footer>
     </>
   );
 }

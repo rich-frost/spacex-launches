@@ -1,0 +1,42 @@
+.launch-card {
+  width: 100%;
+  border: solid 0.005rem grey;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.launch-card-details-container {
+  flex: 1;
+}
+
+@media screen and (min-width: 900px) {
+  .launch-card {
+    flex-direction: row;
+  }
+
+  .launch-card-details-container {
+    flex: 4;
+  }
+}
+
+.launch-card-title {
+  font-weight: 800;
+}
+
+.launch-card-image-container {
+  display: block;
+  flex: 1;
+}
+
+/* 
+.launch-card-link:focus,
+.launch-card-link:active {
+  background-color: gainsboro;
+}
+
+.launch-card-link {
+  text-decoration: none;
+  outline: none;
+  display: block;
+} */
