@@ -15,6 +15,7 @@
     --background: #09090b;
     --foreground: #ededed;
     --primary: #5eead4;
+    --secondary: #0d9488;
 
     --heading-color: #fff;
     --color: #a1a1aa;
@@ -100,6 +101,20 @@ ul {
 li,
 img {
   border-radius: var(--border-radius);
+}
+
+button {
+  background-color: var(--secondary);
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border-radius: var(--border-radius);
+  color: var(--foreground);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
 }
 
 input,

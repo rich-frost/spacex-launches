@@ -4,39 +4,26 @@ import LaunchCard from '../LaunchCard';
 import './index.css';
 import { Launch } from '@/app/types/launch';
 import fetchLaunches from '@/app/lib/graphql/fetchLaunches';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { SEARCH_QUERY_PARAM, SORT_QUERY_PARAM } from '@/app/constants/queryParams';
 import { GRAPHQL_OFFSET } from '@/app/constants/graphql';
-import { SortType } from '@/app/types/pagination';
-
-const isNumber = (value: string): boolean => {
-  return !isNaN(Number(value)) && typeof value !== 'boolean';
-};
+import Loading from '../Loading';
+import { useGraphQLParams } from '@/app/hooks/useGraphQLParams';
 
 export function LaunchList() {
-  const searchParams = useSearchParams();
-  const search = searchParams.get(SEARCH_QUERY_PARAM) || '';
-  const sortOrder = searchParams.get(SORT_QUERY_PARAM) || 'mission_name:asc';
-  const splitSortOrder = sortOrder.split(':');
-  const sort = splitSortOrder[0];
-  const order = splitSortOrder[1] === 'asc' ? SortType.ASC : SortType.DESC;
-
-  const searchByMissionId = isNumber(search) ? true : false;
-
-  const searchQueryObject = {
-    mission_name: searchByMissionId ? undefined : search,
-    mission_id: searchByMissionId ? search : undefined,
-  };
-
+  const { search, sort, order, searchQueryObject } = useGraphQLParams();
   const [offset, setOffset] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [launches, setLaunches] = useState<Launch[]>([]);
 
+  const refetchLaunches = async (offset: number) => {
+    const query = fetchLaunchesQuery({ find: searchQueryObject, limit: GRAPHQL_OFFSET, offset, sort, order });
+    const fetchedLaunches = await fetchLaunches(query);
+    return fetchedLaunches;
+  };
+  // If the offset is updated, re-fetch and add data to existing launches array
   useEffect(() => {
     (async () => {
-      const query = fetchLaunchesQuery({ find: searchQueryObject, limit: GRAPHQL_OFFSET, offset, sort, order });
-      const fetchedLaunches = await fetchLaunches(query);
+      const fetchedLaunches = await refetchLaunches(offset);
 
       if (fetchedLaunches) {
         setLaunches([...launches, ...fetchedLaunches] as Launch[]);
@@ -46,16 +33,10 @@ export function LaunchList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
+  // If search, sort or order are updated, re-fetch but overwrite the existing array
   useEffect(() => {
     (async () => {
-      const query = fetchLaunchesQuery({
-        find: searchQueryObject,
-        limit: GRAPHQL_OFFSET,
-        offset: 0,
-        sort,
-        order,
-      });
-      const fetchedLaunches = await fetchLaunches(query);
+      const fetchedLaunches = await refetchLaunches(0);
 
       if (fetchedLaunches) {
         setLaunches(fetchedLaunches);
@@ -85,10 +66,13 @@ export function LaunchList() {
           />
         ))}
       </ul>
+      {loading && <Loading />}
       {launches.length > 0 && (
-        <button onClick={onLoadMore} disabled={loading}>
-          Load more
-        </button>
+        <div className="launch-list-load-more">
+          <button onClick={onLoadMore} disabled={loading}>
+            Load more
+          </button>
+        </div>
       )}
     </>
   );
