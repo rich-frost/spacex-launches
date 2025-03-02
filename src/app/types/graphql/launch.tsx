@@ -6,5 +6,5 @@ export type GraphQlLaunch = {
     flickr_images: string[];
   };
   details: string;
-  rocket: { fairings: { recovered: boolean } };
+  rocket?: { fairings?: { recovered?: boolean } };
 };

@@ -2,6 +2,12 @@ import dayjs from 'dayjs';
 import LaunchImage from '../LaunchImage';
 import './index.css';
 
+const dependencies = {
+  LaunchImage,
+};
+
+export type LaunchCardDependencies = typeof dependencies;
+
 export type LaunchCardProps = {
   id: string;
   missionName: string;
@@ -9,9 +15,19 @@ export type LaunchCardProps = {
   image: string;
   details: string;
   rocketFairingsRecoveredStatus: boolean;
+  overrides?: typeof dependencies;
 };
 
-const LaunchCard = ({ missionName, image, launchDateUtc, details, rocketFairingsRecoveredStatus }: LaunchCardProps) => {
+const LaunchCard = ({
+  missionName,
+  image,
+  launchDateUtc,
+  details,
+  rocketFairingsRecoveredStatus,
+  overrides,
+}: LaunchCardProps) => {
+  const deps = { ...dependencies, ...overrides };
+
   const charsInDetails = details?.split('');
   let formattedDetails = details;
   if (charsInDetails?.length > 200) {
@@ -21,25 +37,25 @@ const LaunchCard = ({ missionName, image, launchDateUtc, details, rocketFairings
   return (
     <li className="launch-card">
       <div className="launch-card-details-container">
-        <h2>
+        <h2 data-testid="missionName">
           <span className="launch-card-title"> Mission: </span>
           {missionName}
         </h2>
-        <p className="launch-card-details">
+        <p data-testid="missionDetails" className="launch-card-details">
           <span className="launch-card-title">Details: </span>
           {formattedDetails}
         </p>
-        <p>
+        <p data-testid="missionDate">
           <span className="launch-card-title">Launch Date: </span>
           {dayjs(launchDateUtc).format('DD-MM-YYYY HH:mm:ss')}
         </p>
-        <p>
+        <p data-testid="missionFairingsRecovered">
           <span className="launch-card-title">Rocket Fairings Recovered Status: </span>
           {rocketFairingsRecoveredStatus === true ? 'Recovered' : 'Not recovered'}
         </p>
       </div>
       <div className="launch-card-image-container">
-        <LaunchImage missionName={missionName} image={image} />
+        <deps.LaunchImage missionName={missionName} image={image} />
       </div>
     </li>
   );

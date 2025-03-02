@@ -10,7 +10,7 @@ export const launchParser = (launches: GraphQlLaunch[]): Launch[] => {
         launchDateUtc: launch.launch_date_utc,
         image: launch.links?.flickr_images?.[0] || undefined,
         details: launch.details,
-        rocketFairingsRecoveredStatus: launch?.rocket?.fairings?.recovered || 'Unknown',
+        rocketFairingsRecoveredStatus: launch?.rocket?.fairings?.recovered,
       } as Launch)
   );
 };
