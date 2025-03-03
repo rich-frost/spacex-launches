@@ -41,6 +41,7 @@ Based on the brief to fetch launches from SpaceX. The main areas of note are:
 - Added a basic loadng message when loading more items
 - Added `alt` tags to images for accessibility
 - Added semantic HTML - `header`, `main`, `footer`, `ul / li` for cards
+- Added dark and light theme
 
 ### Unit tests
 
