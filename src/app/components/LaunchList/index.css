@@ -1,0 +1,12 @@
+.launch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: space-evenly;
+  min-height: 40vh;
+}
+
+.launch-list-load-more {
+  width: 100%;
+  text-align: center;
+}

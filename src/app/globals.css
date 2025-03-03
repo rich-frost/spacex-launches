@@ -1,0 +1,134 @@
+:root {
+  --background: #ffffff;
+  --foreground: #09090b;
+  --primary: #2b7283;
+  --secondary: #5eead4;
+
+  --heading-color: #000;
+  --color: #27272a;
+
+  --border-color: #27272a;
+  --border-radius: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #09090b;
+    --foreground: #ededed;
+    --primary: #5eead4;
+    --secondary: #096259;
+
+    --heading-color: #fff;
+    --color: #a1a1aa;
+
+    --border-color: #27272a;
+  }
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+}
+
+html {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color);
+}
+
+header {
+  padding: 1rem;
+}
+
+main,
+footer {
+  padding: 0 1rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--heading-color);
+}
+h1 {
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  line-height: 1.75;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li,
+img {
+  border-radius: var(--border-radius);
+}
+
+button {
+  background-color: var(--secondary);
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border-radius: var(--border-radius);
+  color: var(--foreground);
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+input,
+select {
+  border-radius: var(--border-radius);
+  background-color: var(--background);
+  color: var(--foreground);
+  outline: solid 0.0625rem var(--foreground);
+  border-width: 0;
+}
+
+input:focus,
+select:focus {
+  outline-width: 0.15rem;
+}
